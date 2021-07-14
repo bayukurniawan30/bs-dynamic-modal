@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<!-- Required meta tags -->
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+		<!-- Bootstrap CSS -->
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+		<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+		<title>Bootstrap Dynamic Modal</title>
+	</head>
+	<body>
+		<table class="table">
+			<thead>
+				<tr>
+					<th scope="col">#</th>
+					<th scope="col">Nama</th>
+					<th scope="col">Email</th>
+					<th scope="col">Alamat</th>
+					<th scope="col">Action</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<th scope="row">1</th>
+					<td>Bayu Kurniawan</td>
+					<td>bayukw@mail.com</td>
+					<td>Jalan blablablabla Denpasar Bali</td>
+					<td>
+						<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#edit-modal" data-nama="Bayu Kurniawan" data-email="bayukw@mail.com" data-alamat="Jalan blablablabla Denpasar Bali">Edit</button>
+						<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#delete-modal" data-nama="Bayu Kurniawan">Delete</button>
+					</td>
+				</tr>
+				<tr>
+					<th scope="row">2</th>
+					<td>Bang Jago</td>
+					<td>bangjago@mail.com</td>
+					<td>Jalan blablablabla Bandung Jawa Barat</td>
+					<td>
+						<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#edit-modal" data-nama="Bang Jago" data-email="bangjago@mail.com" data-alamat="Jalan blablablabla Bandung Jawa Barat">Edit</button>
+						<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#delete-modal" data-nama="Bang Jago">Delete</button>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+
+		<div class="modal fade" id="edit-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+			<form>
+			  <div class="modal-content">
+				<div class="modal-header">
+				  <h5 class="modal-title" id="exampleModalLabel">Edit</h5>
+				  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				  </button>
+				</div>
+				<div class="modal-body">
+						<div class="form-group">
+							<label>Nama</label>
+							<input type="text" class="form-control" id="edit-nama">
+						</div>
+						<div class="form-group">
+						  <label>Email</label>
+						  <input type="email" class="form-control" id="edit-email">
+						</div>
+						<div class="form-group">
+						  <label>Alamat</label>
+						  <textarea class="form-control" id="edit-alamat"></textarea>
+						</div>
+				</div>
+				<div class="modal-footer">
+				  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+				  <button type="button" class="btn btn-primary">Simpan</button>
+				</div>
+			  </div>
+			  </form>
+			</div>
+		</div>
+
+		<div class="modal fade" id="delete-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+			  <div class="modal-content">
+				<div class="modal-header">
+				  <h5 class="modal-title" id="exampleModalLabel">Delete</h5>
+				  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				  </button>
+				</div>
+				<div class="modal-body">
+					Apakah anda yakin akan menghapus <span id="delete-nama">Nama</span>?
+				</div>
+				<div class="modal-footer">
+				  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+				  <button type="button" class="btn btn-danger">Delete</button>
+				</div>
+			  </div>
+			</div>
+		</div>
+
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
+
+		<script>
+			$(document).ready(function() {
+				$('#edit-modal').on('show.bs.modal', function (event) {
+					var btn = $(event.relatedTarget),
+						nama   = btn.data('nama'),
+						email  = btn.data('email'),
+						alamat = btn.data('alamat');
+
+					// console.log(nama);
+					// console.log(email);
+					// console.log(alamat);
+
+					$('#edit-modal').find('#edit-nama').val(nama);
+					$('#edit-modal').find('#edit-email').val(email);
+					$('#edit-modal').find('#edit-alamat').val(alamat);
+				})
+
+				$('#delete-modal').on('show.bs.modal', function (event) {
+					var btn = $(event.relatedTarget),
+						nama   = btn.data('nama');
+
+					$('#delete-modal').find('#delete-nama').text(nama);
+				})
+			})
+		</script>
+	</body>
+</html>
